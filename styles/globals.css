@@ -18,6 +18,17 @@ a {
   box-sizing: border-box;
 }
 
+.embla {
+  overflow: hidden;
+}
+.embla__container {
+  display: flex;
+}
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+
 .card {
   @apply mb-5  block   rounded-lg border border-gray-200  shadow-md;
 }

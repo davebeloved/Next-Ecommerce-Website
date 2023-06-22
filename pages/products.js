@@ -3,16 +3,19 @@ import Layout from "../components/Layout";
 import db from "../utils/db";
 import Product from "../models/Product";
 import Link from "next/link";
+import { TbCurrencyNaira } from "react-icons/tb";
 
 const products = ({ products }) => {
   console.log(products);
   return (
     <Layout title="All Products">
-      <div className="px-20 py-32">
-        <h2 className="font-bold text-2xl  mb-10">All Products</h2>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
+      <div className="px-5 md:px-10 lg:px-20 mt-32 md:-ml-16 lg:ml-0 ">
+        <h2 className="text-center lg:text-left text-2xl my-12 font-bold">
+          All Products
+        </h2>
+        <div className="grid grid-cols-1 md:gap-20 lg:gap-10 md:grid-cols-3 lg:grid-cols-4">
           {products.map((product) => (
-            <div className="card " key={product.slug}>
+            <div className="card w-full md:w-[250px] " key={product.slug}>
               <Link href={`/product/${product.slug}`}>
                 <img
                   src={product.image}
@@ -22,17 +25,35 @@ const products = ({ products }) => {
               </Link>
               <div className="flex flex-col items-center justify-center p-5">
                 <Link href={`/product/${product.slug}`}>
-                  <h2 className="text-lg font-bold">{product.name}</h2>
+                  {product.name.length > 20 ? (
+                    <h2 className="text-lg font-bold">
+                      {product.name.substring(0, 20)}...
+                    </h2>
+                  ) : (
+                    <h2 className="text-lg font-bold">{product.name}</h2>
+                  )}
                 </Link>
-                <p className=" font-semibold">{product.brand}</p>
-                <div className="flex gap-x-3 mb-2">
-                  <p className="font-semibold text-xl line-through">
-                    ${product.oldPrice}
+                {product.brand.length > 20 ? (
+                  <p className="text-gray-600 text-lg font-bold">
+                    {product.brand.substring(0, 20)}...
                   </p>
-                  <p className="font-semibold text-xl">${product.price}</p>
+                ) : (
+                  <p className="text-gray-600 text-lg font-bold">
+                    {product.brand}
+                  </p>
+                )}
+                <div className="flex gap-x-3 mb-2">
+                  <p className="flex items-center text-gray-400 font-semibold text-xl line-through">
+                    <TbCurrencyNaira />
+                    {product.oldPrice}
+                  </p>
+                  <p className="flex items-center font-semibold text-xl">
+                    <TbCurrencyNaira />
+                    {product.price}
+                  </p>
                 </div>
                 <button
-                  className="primary-button"
+                  className="primary-button w-full"
                   type="button"
                   onClick={() => addToCartHandler(product)}
                 >

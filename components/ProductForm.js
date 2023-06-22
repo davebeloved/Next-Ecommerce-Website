@@ -57,7 +57,7 @@ export default function AdminProductEditScreen({
   const [price, setPrice] = useState(existingPrice || "");
   const [oldPrice, setOldPrice] = useState(existingOldPrice || "");
   const [category, setCategory] = useState(existingCat || "");
-  const [file, setFile] = useState(existingImg || "");
+  const [file, setFile] = useState("");
   const [countInStock, setCountInStock] = useState(existingCount || "");
 
   const { query } = useRouter();

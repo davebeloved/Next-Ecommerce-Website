@@ -13,6 +13,8 @@ import SearchIcon from "@heroicons/react/24/outline/MagnifyingGlassIcon";
 import Image from "next/image";
 import { IoIosArrowDown } from "react-icons/io";
 import Footer from "./Footer";
+import { FaBars, FaAngleRight } from "react-icons/fa";
+import { AiFillCloseCircle } from "react-icons/ai";
 
 export default function Layout({ title, children }) {
   const { status, data: session } = useSession();
@@ -38,10 +40,18 @@ export default function Layout({ title, children }) {
     router.push(`/search?query=${query}`);
   };
 
+  const [showNav, setShowNav] = useState(false);
+
+  const handleShowMenu = () => {
+    setShowNav(true);
+  };
+  const handleCloseMenu = () => {
+    setShowNav(false);
+  };
   return (
     <>
       <Head>
-        <title>{title ? title + " - Amazona" : "Amazona"}</title>
+        <title>{title ? title + " - Online-Shop" : "Online-Shop"}</title>
         <meta name="description" content="Ecommerce Website" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -50,32 +60,55 @@ export default function Layout({ title, children }) {
 
       <div className="flex min-h-screen flex-col justify-between ">
         <header>
-          <nav className="flex mb-12 h-[70px] items-center px-20 justify-between bg-[#d1411e] shadow-md fixed z-[1000] top-0 w-full">
-            <Link
-              href="/"
-              className="text-lg text-white hover:text-white font-bold"
-            >
-              Onlinn-Shop
-            </Link>
-            <form
-              onSubmit={submitHandler}
-              className="mx-auto  hidden  justify-center md:flex"
-            >
-              <input
-                onChange={(e) => setQuery(e.target.value)}
-                type="text"
-                className="rounded-tr-none rounded-br-none p-1 text-sm   focus:ring-0"
-                placeholder="Search products"
-              />
-              <button
-                className="rounded rounded-tl-none rounded-bl-none bg-white p-1 text-sm dark:text-black"
-                type="submit"
-                id="button-addon2"
+          <nav className="flex flex-col lg:flex-row mb-12 h-[70px] lg:items-center  lg:px-20 lg:justify-between bg-[#d1411e] shadow-md fixed z-[1000] top-0 w-full">
+            <div className="flex items-center lg:gap-x-10 my-5 lg:my-0">
+              <Link
+                href="/"
+                className="text-lg px-5 lg:px-0 text-white my-auto hover:text-white font-bold"
               >
-                <SearchIcon className="h-5 w-5"></SearchIcon>
-              </button>
-            </form>
-            <div className="flex items-center gap-x-6  z-10 text-white">
+                Onlinn-Shop
+              </Link>
+              <form
+                onSubmit={submitHandler}
+                className="mx-auto flex items-center   justify-center md:flex"
+              >
+                <input
+                  onChange={(e) => setQuery(e.target.value)}
+                  type="text"
+                  className="rounded-tr-none rounded-br-none p-1 text-sm   focus:ring-0"
+                  placeholder="Search products"
+                />
+                <button
+                  className="rounded rounded-tl-none rounded-bl-none bg-white p-1 text-sm dark:text-black"
+                  type="submit"
+                  id="button-addon2"
+                >
+                  <SearchIcon className="h-5 w-5"></SearchIcon>
+                </button>
+              </form>
+              {showNav ? (
+                <AiFillCloseCircle
+                  onClick={handleCloseMenu}
+                  size={30}
+                  className="mr-5 lg:hidden cursor-pointer text-white transition-all duration-500 ease-in"
+                />
+              ) : (
+                <FaBars
+                  onClick={handleShowMenu}
+                  size={25}
+                  color="white"
+                  className="mr-5 lg:hidden cursor-pointer transition-all duration-500 ease-in"
+                />
+              )}
+            </div>
+
+            <div
+              className={
+                !showNav
+                  ? `px-5 lg:px-0 flex flex-col lg:flex-row lg:items-center gap-x-6   text-white  py-5 left-0 my-16 lg:py-0 space-y-6 lg:space-y-0 lg:my-0 z-[-1] lg:z-auto absolute lg:static bg-[#d1411e] w-full lg:w-auto top-[-400px] opacity-0 lg:opacity-100 transition-all ease-in duration-500`
+                  : `px-5 lg:px-0 flex flex-col lg:flex-row lg:items-center gap-x-6   text-white  py-5 left-0 my-16 lg:py-0 space-y-6 lg:space-y-0 lg:my-0 z-[-1] lg:z-auto absolute lg:static bg-[#d1411e] w-full lg:w-auto top-0 opacity-100 transition-all ease-in duration-500`
+              }
+            >
               <Link
                 href="/"
                 className="text-white font-semibold hover:text-white"
@@ -89,7 +122,7 @@ export default function Layout({ title, children }) {
                 All Products
               </Link>
               <Link
-                href="/categoies"
+                href="/search"
                 className="text-white font-semibold hover:text-white"
               >
                 Categories
@@ -112,9 +145,13 @@ export default function Layout({ title, children }) {
                 <Menu as="div" className="relative  inline-block">
                   <Menu.Button className="text-white font-semibold flex items-center">
                     {session.user.name}
-                    <IoIosArrowDown className="mt-1" />
+                    {showNav ? (
+                      <FaAngleRight className="mt-1" />
+                    ) : (
+                      <IoIosArrowDown className="mt-1" />
+                    )}
                   </Menu.Button>
-                  <Menu.Items className="absolute right-0 w-56 origin-top-right bg-white  shadow-lg ">
+                  <Menu.Items className="absolute left-[68px] lg:left-[-168px] lg:top-10 top-2 lg:right-0 w-56 origin-top-right bg-white    shadow-lg ">
                     <Menu.Item>
                       <DropdownLink
                         className="dropdown-link text-[#d1411e] font-semibold hover:text-white hover:bg-[#d1411e]"
