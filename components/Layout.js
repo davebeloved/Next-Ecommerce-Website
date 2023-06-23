@@ -51,7 +51,7 @@ export default function Layout({ title, children }) {
   return (
     <>
       <Head>
-        <title>{title ? title + " - Online-Shop" : "Online-Shop"}</title>
+        <title>{title ? title + " - Obi-Store" : "Obi-Store"}</title>
         <meta name="description" content="Ecommerce Website" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -60,17 +60,37 @@ export default function Layout({ title, children }) {
 
       <div className="flex min-h-screen flex-col justify-between ">
         <header>
-          <nav className="flex flex-col lg:flex-row mb-12 h-[70px] lg:items-center  lg:px-20 lg:justify-between bg-[#d1411e] shadow-md fixed z-[1000] top-0 w-full">
+          <nav className="flex  flex-col justify-center lg:flex-row mb-12 h-[70px] lg:items-center  lg:px-16 lg:justify-between bg-[#d1411e] shadow-md fixed z-[1000] top-0 w-full">
             <div className="flex items-center lg:gap-x-10 my-5 lg:my-0">
               <Link
-                href="/"
-                className="text-lg px-5 lg:px-0 text-white my-auto hover:text-white font-bold"
+                href={"/"}
+                className="flex items-center pl-3 md:pl-6 lg:pl-0 text-sm md:text-lg px-5 lg:px-0 text-white my-auto hover:text-white font-bold"
               >
-                Onlinn-Shop
+                <div className="bg-white rounded-full p-[10px] w-[30px] h-[30px] md:w-[50px] md:h-[50px]">
+                  <Image
+                    src="/img/telephone.png"
+                    alt=""
+                    width="32"
+                    height="32"
+                  />
+                </div>
+                <div className="ml-3 text-white text-xs md:text-xl">
+                  {/* <div className=" text-white">ORDER NOW!</div> */}
+
+                  <div className=" text-white">OBI-EXCEL TOOLS</div>
+                  <div className=" text-white">+2348063645038</div>
+                </div>
               </Link>
+
+              {/* <Link
+                href="/"
+                className="text-sm md:text-lg px-5 lg:px-0 text-white my-auto hover:text-white font-bold"
+              >
+                OBI-EXCEL TOOLS
+              </Link> */}
               <form
                 onSubmit={submitHandler}
-                className="mx-auto flex items-center   justify-center md:flex"
+                className="mx-auto flex items-center   justify-center"
               >
                 <input
                   onChange={(e) => setQuery(e.target.value)}

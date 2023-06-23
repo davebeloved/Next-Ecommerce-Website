@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import Cookies from 'js-cookie';
-import CheckoutWizard from '../components/CheckoutWizard';
-import Layout from '../components/Layout';
-import { Store } from '../utils/Store';
-import { useRouter } from 'next/router';
+import React, { useContext, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import Cookies from "js-cookie";
+import CheckoutWizard from "../components/CheckoutWizard";
+import Layout from "../components/Layout";
+import { Store } from "../utils/Store";
+import { useRouter } from "next/router";
 
 export default function ShippingScreen() {
   const {
@@ -20,20 +20,20 @@ export default function ShippingScreen() {
   const router = useRouter();
 
   useEffect(() => {
-    setValue('fullName', shippingAddress.fullName);
-    setValue('address', shippingAddress.address);
-    setValue('city', shippingAddress.city);
-    setValue('postalCode', shippingAddress.postalCode);
-    setValue('country', shippingAddress.country);
+    setValue("fullName", shippingAddress.fullName);
+    setValue("address", shippingAddress.address);
+    setValue("city", shippingAddress.city);
+    setValue("postalCode", shippingAddress.postalCode);
+    setValue("country", shippingAddress.country);
   }, [setValue, shippingAddress]);
 
   const submitHandler = ({ fullName, address, city, postalCode, country }) => {
     dispatch({
-      type: 'SAVE_SHIPPING_ADDRESS',
+      type: "SAVE_SHIPPING_ADDRESS",
       payload: { fullName, address, city, postalCode, country },
     });
     Cookies.set(
-      'cart',
+      "cart",
       JSON.stringify({
         ...cart,
         shippingAddress: {
@@ -46,7 +46,7 @@ export default function ShippingScreen() {
       })
     );
 
-    router.push('/payment');
+    router.push("/payment");
   };
 
   return (
@@ -63,8 +63,8 @@ export default function ShippingScreen() {
             className="w-full"
             id="fullName"
             autoFocus
-            {...register('fullName', {
-              required: 'Please enter full name',
+            {...register("fullName", {
+              required: "Please enter full name",
             })}
           />
           {errors.fullName && (
@@ -76,9 +76,9 @@ export default function ShippingScreen() {
           <input
             className="w-full"
             id="address"
-            {...register('address', {
-              required: 'Please enter address',
-              minLength: { value: 3, message: 'Address is more than 2 chars' },
+            {...register("address", {
+              required: "Please enter address",
+              minLength: { value: 3, message: "Address is more than 2 chars" },
             })}
           />
           {errors.address && (
@@ -90,8 +90,8 @@ export default function ShippingScreen() {
           <input
             className="w-full"
             id="city"
-            {...register('city', {
-              required: 'Please enter city',
+            {...register("city", {
+              required: "Please enter city",
             })}
           />
           {errors.city && (
@@ -103,8 +103,8 @@ export default function ShippingScreen() {
           <input
             className="w-full"
             id="postalCode"
-            {...register('postalCode', {
-              required: 'Please enter postal code',
+            {...register("postalCode", {
+              required: "Please enter postal code",
             })}
           />
           {errors.postalCode && (
@@ -116,8 +116,8 @@ export default function ShippingScreen() {
           <input
             className="w-full"
             id="country"
-            {...register('country', {
-              required: 'Please enter country',
+            {...register("country", {
+              required: "Please enter country",
             })}
           />
           {errors.country && (
