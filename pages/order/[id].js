@@ -46,7 +46,7 @@ function reducer(state, action) {
 function OrderScreen() {
   const { data: session } = useSession();
   // order/:id
-  const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
+  // const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
 
   const { query } = useRouter();
   const orderId = query.id;
@@ -91,20 +91,21 @@ function OrderScreen() {
         dispatch({ type: "DELIVER_RESET" });
       }
     } else {
-      const loadPaypalScript = async () => {
-        const { data: clientId } = await axios.get("/api/keys/paypal");
-        paypalDispatch({
-          type: "resetOptions",
-          value: {
-            "client-id": clientId,
-            currency: "USD",
-          },
-        });
-        paypalDispatch({ type: "setLoadingStatus", value: "pending" });
-      };
-      loadPaypalScript();
+      // const loadPaypalScript = async () => {
+      //   const { data: clientId } = await axios.get("/api/keys/paypal");
+      //   paypalDispatch({
+      //     type: "resetOptions",
+      //     value: {
+      //       "client-id": clientId,
+      //       currency: "USD",
+      //     },
+      //   });
+      //   paypalDispatch({ type: "setLoadingStatus", value: "pending" });
+      // };
+      // loadPaypalScript();
     }
-  }, [order, orderId, paypalDispatch, successDeliver, successPay]);
+    // }, [order, orderId, paypalDispatch, successDeliver, successPay]);
+  }, [order, orderId, successDeliver, successPay]);
   const {
     shippingAddress,
     paymentMethod,
@@ -276,22 +277,30 @@ function OrderScreen() {
                       <div>${totalPrice}</div>
                     </div>
                   </li>
-                  {!isPaid && (
-                    <li>
-                      {isPending ? (
+                  {/* {!isPaid && ( */}
+                  <li>
+                    {/* {isPending ? (
                         <div>Loading...</div>
-                      ) : (
-                        <div className="w-full">
-                          <PayPalButtons
-                            createOrder={createOrder}
-                            onApprove={onApprove}
-                            onError={onError}
-                          ></PayPalButtons>
-                        </div>
-                      )}
-                      {loadingPay && <div>Loading...</div>}
-                    </li>
-                  )}
+                      ) : ( */}
+                    <div className="w-full">
+                      {/* <PayPalButtons
+                          createOrder={createOrder}
+                          onApprove={onApprove}
+                          onError={onError}
+                        ></PayPalButtons> */}
+                    </div>
+                    {/* )} */}
+                    {/* {loadingPay && <div>Loading...</div>} */}
+                  </li>
+                  <h2 className="bold text-2xl mt-10">1025698151</h2>
+                  <h2 className="font-semibold">
+                    OBI EXCEL TOOLS SYNERGY NIG LTD
+                  </h2>
+                  <p className="py-3 italic capitalize">
+                    Kindly make payment to the account details above to complete
+                    your order...
+                  </p>
+                  {/* )} */}
                   {session.user.isAdmin &&
                     order.isPaid &&
                     !order.isDelivered && (

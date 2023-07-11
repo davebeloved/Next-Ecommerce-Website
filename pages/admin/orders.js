@@ -3,6 +3,7 @@ import Link from "next/link";
 import React, { useEffect, useReducer } from "react";
 import Layout from "../../components/Layout";
 import { getError } from "../../utils/error";
+import { TbCurrencyNaira } from "react-icons/tb";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -89,7 +90,10 @@ export default function AdminOrderScreen() {
                       <td className="p-5">
                         {order.createdAt.substring(0, 10)}
                       </td>
-                      <td className="p-5">${order.totalPrice}</td>
+                      <td className="p-5 flex items-center">
+                        <TbCurrencyNaira className="" />
+                        {order.totalPrice}
+                      </td>
                       <td className="p-5">
                         {order.isPaid
                           ? `${order.paidAt.substring(0, 10)}`
