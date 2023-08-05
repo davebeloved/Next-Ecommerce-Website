@@ -8,6 +8,7 @@ import { useEffect, useReducer } from "react";
 import { toast } from "react-toastify";
 import Layout from "../../components/Layout";
 import { getError } from "../../utils/error";
+import { TbCurrencyNaira } from "react-icons/tb";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -239,9 +240,17 @@ function OrderScreen() {
                           </Link>
                         </td>
                         <td className=" p-5 text-right">{item.quantity}</td>
-                        <td className="p-5 text-right">${item.price}</td>
                         <td className="p-5 text-right">
-                          ${item.quantity * item.price}
+                          <p className="flex items-center justify-end">
+                            <TbCurrencyNaira size={20} />
+                            {item.price}
+                          </p>
+                        </td>
+                        <td className="p-5 text-right">
+                          <p className="flex items-center justify-end">
+                            <TbCurrencyNaira size={20} />
+                            {item.quantity * item.price}
+                          </p>
                         </td>
                       </tr>
                     ))}
@@ -256,25 +265,37 @@ function OrderScreen() {
                   <li>
                     <div className="mb-2 flex justify-between">
                       <div>Items</div>
-                      <div>${itemsPrice}</div>
+                      <div className="flex items-center">
+                        <TbCurrencyNaira size={20} />
+                        {itemsPrice}
+                      </div>
                     </div>
                   </li>{" "}
                   <li>
                     <div className="mb-2 flex justify-between">
                       <div>Tax</div>
-                      <div>${taxPrice}</div>
+                      <div className="flex items-center">
+                        <TbCurrencyNaira size={20} />
+                        {taxPrice}
+                      </div>
                     </div>
                   </li>
                   <li>
                     <div className="mb-2 flex justify-between">
                       <div>Shipping</div>
-                      <div>${shippingPrice}</div>
+                      <div className="flex items-center">
+                        <TbCurrencyNaira size={20} />
+                        {shippingPrice}
+                      </div>
                     </div>
                   </li>
                   <li>
                     <div className="mb-2 flex justify-between">
                       <div>Total</div>
-                      <div>${totalPrice}</div>
+                      <div className="flex items-center">
+                        <TbCurrencyNaira size={20} />
+                        {totalPrice}
+                      </div>
                     </div>
                   </li>
                   {/* {!isPaid && ( */}
