@@ -1,7 +1,7 @@
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useRef, useEffect, useReducer, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import Layout from "./Layout";
@@ -40,7 +40,7 @@ function reducer(state, action) {
 }
 export default function AdminProductEditScreen({
   _id,
-  image: existingImg,
+  // image: existingImg,
   name: existingName,
   slug: existingSlug,
   brand: existingBrand,
